@@ -41,15 +41,41 @@ class DateState extends State<DatePage> {
           ),
           body: ListView.builder(
             itemBuilder: (BuildContext context, int position) =>
-                getRow(position),
+                _getRow(position),
             itemCount: datas.length,
+//            padding: EdgeInsets.only(left: 16.0,),
           )
       );
   }
 
-  Widget getRow(int i) {
+  Widget _getRow(int i) {
     if (datas[i] != null) {
-      return Text('${datas[i]}');
+      return GestureDetector(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: 16.0, bottom: 16.0, left: 16.0),
+                    child: Text('${datas[i]}',
+                      style: TextStyle(
+                          fontSize: 17.0
+                      ),),
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Divider(
+              height: 1.0,
+            )
+          ],
+        ),
+
+        onTap: () => print('${datas[i]}'),
+      );
     }
 
     return null;
