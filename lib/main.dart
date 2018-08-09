@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gank_flutter/data/gank_data.dart';
 import 'package:gank_flutter/info_ui/date_ui.dart';
+import 'package:gank_flutter/info_ui/home.dart';
 import 'package:gank_flutter/network/http.dart';
+
 
 void main() => runApp(new MyApp());
 
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
       ),
       home: MainPage(),
       routes: <String, WidgetBuilder>{
-        '/infodate': (BuildContext context) => DatePage()
+        '/infodate': (BuildContext context) => DatePage(),
+        '/home': (BuildContext context) => HomePage(),
       },
     );
   }
@@ -40,14 +43,37 @@ class MainState extends State<MainPage> {
       appBar: AppBar(
         title: Text('Gank io'),
       ),
-      body: Row(
+      body: Column(
         children: <Widget>[
-          Expanded(
-              child: RaisedButton(
-                onPressed: () => Navigator.of(context).pushNamed('/infodate'),
-                child: Text('时间浏览'),
-              )
+          Row(
+              children: <Widget>[
+                Expanded(
+                  child: RaisedButton(
+                    onPressed: () => Navigator.of(context).pushNamed('/infodate'),
+                    child: Text('时间浏览'),
+                  ),
+                )
+              ]),
+          Container(
+            margin: EdgeInsets.only(top: 8.0),
           ),
+          Row(
+              children: <Widget>[
+                Expanded(
+                    child: RaisedButton(
+                      onPressed: () =>
+                          Navigator.
+                          of(context).pushNamed('/home'
+                          ),
+                      child: Text('浏览主页')
+                      ,
+                    )
+                )
+              ]),
+
+          Container(
+            margin: EdgeInsets.only(top: 8.0),
+          )
         ],
       ),
     );

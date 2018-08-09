@@ -16,20 +16,25 @@ class DateState extends State<DatePage> {
 
   @override
   void initState() {
-    init();
+    _getData();
   }
 
-  Future init() async {
-    String str = await GankHttp.get('https://gank.io/api/day/history');
-    Map map = JSON.decode(str);
-    datas = InfoDate
-        .fromMap(map)
-        .results;
+  _getData() async {
+    String str = await GankHttp.getDate();
+    GankResponse response = GankResponse.fromRes(str);
+    if (response.isSuccess()) {
+      datas = InfoDate
+          .fromMap(response.map)
+          .results;
 
-    print(datas);
-    setState(() {
+      print(datas);
+      setState(() {
 
-    });
+      });
+    } else {
+      // 调用接口失败
+      print('调用接口失败');
+    }
   }
 
   @override
